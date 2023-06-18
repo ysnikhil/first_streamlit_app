@@ -21,9 +21,12 @@ my_fruit_list=pandas.read_csv("https://uni-lab-files.s3.us-west-2.amazonaws.com/
 my_fruit_list=my_fruit_list.set_index('Fruit')
 
 #Add multipicker on the created index
-streamlit.multiselect("Pick Some Fruits:", list(my_fruit_list.index), ['Avocado','Strawberries'])
+fruits_selected=streamlit.multiselect("Pick Some Fruits:", list(my_fruit_list.index), ['Avocado','Strawberries'])
+
+#Read only those fruits which user has selected in the multipicker
+fruits_to_show=my_fruit_list.loc[fruits_selected]
 
 #Load the dataframe in streamlit app
-streamlit.dataframe(my_fruit_list)
+streamlit.dataframe(fruits_to_show)
 
 
