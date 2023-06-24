@@ -1,5 +1,6 @@
 import streamlit
 import pandas
+import requests 
 
 #Building first streamlit app using python on HEALTHY DINER
 
@@ -28,5 +29,27 @@ fruits_to_show=my_fruit_list.loc[fruits_selected]
 
 #Load the dataframe in streamlit app
 streamlit.dataframe(fruits_to_show)
+
+my_fdic_response=requests.get("https://fruityvice.com/api/fruit/watermelon")
+streamlit.text(my_fdic_response)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
