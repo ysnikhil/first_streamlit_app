@@ -32,8 +32,11 @@ streamlit.dataframe(fruits_to_show)
 
 
 #New section to displace the fruityvice fruits advice
-fruityvice_response=requests.get("https://fruityvice.com/api/fruit/watermelon")
-streamlit.text(fruityvice_response.json())
+fruityvice_response=requests.get("https://fruityvice.com/api/fruit/" + "kiwi")
+normalized_api_json_response=pandas.json_normalize(fruityvice_response.json())
+
+streamlit.dataframe(normalized_api_json_response)
+
 
 
 
