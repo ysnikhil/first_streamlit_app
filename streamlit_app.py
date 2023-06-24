@@ -30,8 +30,10 @@ fruits_to_show=my_fruit_list.loc[fruits_selected]
 #Load the dataframe in streamlit app
 streamlit.dataframe(fruits_to_show)
 
-my_fdic_response=requests.get("https://fruityvice.com/api/fruit/watermelon")
-streamlit.text(my_fdic_response)
+
+#New section to displace the fruityvice fruits advice
+fruityvice_response=requests.get("https://fruityvice.com/api/fruit/watermelon")
+streamlit.text(fruityvice_response.json)
 
 
 
