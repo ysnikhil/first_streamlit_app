@@ -33,7 +33,13 @@ streamlit.dataframe(fruits_to_show)
 
 #New section to displace the fruityvice fruits advice
 streamlit.header('Fruityvice Fruit Advice')
-fruityvice_response=requests.get("https://fruityvice.com/api/fruit/" + "kiwi")
+
+#Take inputs from user
+fruit_input=streamlit.text_input('What fruit would you like to get more details about:', 'kiwi')
+streamlit.write('You have entered',fruit_input)
+
+#Use the user input to append in the api response
+fruityvice_response=requests.get("https://fruityvice.com/api/fruit/" + fruit_input)
 normalized_api_json_response=pandas.json_normalize(fruityvice_response.json())
 
 streamlit.dataframe(normalized_api_json_response)
