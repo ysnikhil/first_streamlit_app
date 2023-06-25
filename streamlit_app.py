@@ -1,6 +1,7 @@
 import streamlit
 import pandas
 import requests 
+import snowflake.connector
 
 #Building first streamlit app using python on HEALTHY DINER
 
