@@ -2,7 +2,7 @@ import streamlit
 import pandas
 import requests 
 import snowflake.connector
-
+from urllib.error import URLError
 
 #Building first streamlit app using python on HEALTHY DINER
 
@@ -37,15 +37,21 @@ streamlit.dataframe(fruits_to_show)
 streamlit.header('Fruityvice Fruit Advice')
 
 #Take inputs from user
-fruit_input=streamlit.text_input('What fruit would you like to get more details about:', 'kiwi')
-streamlit.write('You have entered',fruit_input)
-
-#Use the user input to append in the api response
-fruityvice_response=requests.get("https://fruityvice.com/api/fruit/" + fruit_input)
-normalized_api_json_response=pandas.json_normalize(fruityvice_response.json())
-
-streamlit.dataframe(normalized_api_json_response)
-
+try:
+  fruit_input=streamlit.text_input('What fruit would you like to get more details about:')
+  if not fruit_input:
+    streamlit.error('Please select a fruit to get a information.')
+    
+  else:
+    streamlit.write('You have entered',fruit_input)
+    
+    #Use the user input to append in the api response
+    fruityvice_response=requests.get("https://fruityvice.com/api/fruit/" + fruit_input)
+    normalized_api_json_response=pandas.json_normalize(fruityvice_response.json())
+    streamlit.dataframe(normalized_api_json_response)
+    
+except URLError as e :
+  streamlit.error()
 
 #Adding logic to connect to snowflake account
 streamlit.stop()
