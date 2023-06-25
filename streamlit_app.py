@@ -3,6 +3,7 @@ import pandas
 import requests 
 import snowflake.connector
 
+
 #Building first streamlit app using python on HEALTHY DINER
 
 streamlit.title('My Parents New Healthy Diner')
@@ -63,6 +64,9 @@ streamlit.dataframe(my_data_rows)
 add_my_fruit=streamlit.text_input("What fruit would you like to add")
 streamlit.write("Thanks for adding", add_my_fruit)
 
+#Code to insert the values given by the user
+
+my_cur.execute("insert into fruit_load_list values('add_my_fruit')")
 
 
 
